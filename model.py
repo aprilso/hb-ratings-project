@@ -79,4 +79,4 @@ if __name__ == '__main__':
     connect_to_db(app)
 
 #sample that worked: rate2 = Rating(score=5, user_id=test_user.user_id, movie_id=test_movie.movie_id)
-#command: movies = Movie.query.all() creates a LIST of movies, so movie=movies[0] accesses that list (not the table movies)
+#command: movies = Movie.query.all() creates a LIST of movies, so movie =movies[0] accesses that list (not the table movies)
