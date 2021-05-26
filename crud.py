@@ -24,12 +24,21 @@ def create_movie(title, overview, release_date, poster_path):
 
     return movie
 
+# def create_rating(user_id, movie_title, score)
+    # query for the movie using filter_by
+    # query for the user using .get (or just use user_id)
 def create_rating(user, movie, score):
   """create and return a new rating"""
     
   rating = Rating(user=user, movie=movie, score=score)
+  #parameters 'user' and 'movie' are OBJECTS to be passed! query these objects, 
+  #store in variable 'user' & 'movie', pass in arguments
+  #this is good if you're already accessing the data by objects
+
   #our original: rating = Rating(user_id=user_id, movie_id=movie_id, score=score)
-  ### Check why it's like this, we had errors with the given solution
+  ### This solution isn't wrong - if you're querying everything by movie_id, it's ok to continue querying by movie_id
+  
+  
 
   db.session.add(rating)
   db.session.commit()
