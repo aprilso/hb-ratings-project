@@ -68,8 +68,25 @@ def new_user():
 
     return redirect('/')
 
+@app.route('/login', methods=["POST"])
+def login():
+    """login user"""
+    email = request.form.get('login_email')
+    password = request.form.get('login_password')
 
-
+    user = crud.get_user_by_email(email)
+    if not user or user.password != password:
+        flash("The email or password is incorrect")
+    else:
+        session["user_email"] = user.email
+        flash(f"Welcome back, {user.email}")
+    # if user.password == password:
+    #     flash (f"Logged in! User id is {user.user_id}")
+    #     session['user'] = user.user_id
+    # else:
+    #     flash ("Wrong password, try again")
+    
+    return redirect ("/")
 
 
 
