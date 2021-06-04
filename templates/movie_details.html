@@ -9,5 +9,19 @@
   {{ movie.overview }}
 </p>
 
+<h2>Rate This Movie:</h2>
+<form action="/movies/{{ movie.movie_id }}/ratings" method="POST">
+  Rating:  
+  <select name="rating">
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+  <input type="submit">
+</form>
+
 <img src="{{ movie.poster_path }}">
 {% endblock %}

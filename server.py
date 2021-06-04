@@ -33,6 +33,28 @@ def movie_details(movie_id):
 
     return render_template('movie_details.html', movie=movie)
 
+@app.route('/movies/<movie_id>/ratings', methods =["POST"])
+def rate_movie(movie_id):
+    """rate a movie from 0-5"""
+
+    logged_in_user = session.get("user_email") 
+    user_rating = int(request.form.get("rating"))
+
+    if logged_in_user is None:
+        flash("You must be logged in to a rate a movie")
+    elif not user_rating:
+        flash("Error: yo didn't rate the movie")
+    else:
+        user = crud.get_user_by_email(logged_in_user)
+        movie = crud.get_movie_by_id(movie_id)
+
+        crud.create_rating(user, movie, user_rating)
+
+        flash(f"We have saved {logged_in_user}, {movie_id}, with a score of {user_rating}")
+
+    return redirect(f"/movies/{movie_id}")
+
+
 @app.route('/users')
 def userpage():
     """view all users"""
@@ -87,6 +109,14 @@ def login():
     #     flash ("Wrong password, try again")
     
     return redirect ("/")
+
+# once you're logged in, go to the movie page to rate a movie
+# in the movie_details.html page, add rating html code - dropdown menu 1-5 rating, submit (flash message that rating worked)
+# create an app route for rating
+# update the database with the movie's rating
+
+
+
 
 
 
